@@ -1,15 +1,18 @@
 <template>
-  <el-dialog v-model="aboutDialogVisible" class="about-dialog border-r-4">
+  <el-dialog v-model="aboutDialogVisible" class="about-dialog">
     <template #header="{ titleId, titleClass }">
-      <div class="logo flex-center" :id="titleId" :class="titleClass">
-        <img src="@/assets/MaxKB-logo.svg" height="59" />
+      <div class="flex-center">
+        <div class="logo mr-4"></div>
+        <div class="app-logo-font about-title" :id="titleId" :class="titleClass">
+          {{ defaultTitle }}
+        </div>
       </div>
     </template>
     <div class="about-ui">
       <el-card
         shadow="hover"
         class="mb-16"
-        @click="toUrl('https://maxkb.cn/docs/')"
+        @click="toUrl('https://github.com/1Panel-dev/MaxKB/wiki')"
       >
         <div class="flex align-center cursor">
           <AppIcon iconName="app-reading" class="mr-16 ml-8" style="font-size: 24px"></AppIcon>
@@ -54,18 +57,27 @@ defineExpose({ open })
 <style lang="scss" scope>
 .about-dialog {
   padding: 0 0 24px 0;
+  border-radius: 4px;
   width: 600px;
   font-weight: 400;
   .el-dialog__header {
     background: var(--app-header-bg-color);
     margin-right: 0;
     height: 140px;
-    box-sizing: border-box;
     border-radius: 4px 4px 0 0;
+    box-sizing: border-box;
   }
   .el-dialog__title {
-    height: 140px;
-    box-sizing: border-box;
+    line-height: 140px;
+  }
+  .about-title {
+    font-size: 40px;
+  }
+  .logo {
+    background-image: url('@/assets/logo.png');
+    background-size: 100% 100%;
+    width: 59px;
+    height: 59px;
   }
   .about-ui {
     width: 360px;

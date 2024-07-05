@@ -7,7 +7,6 @@
     @desc:
 """
 
-from django.core import cache
 from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import action
@@ -27,8 +26,6 @@ from common.response import result
 from common.swagger_api.common_api import CommonApi
 from common.util.common import query_params_to_single_dict
 from dataset.serializers.dataset_serializers import DataSetSerializers
-
-chat_cache = cache.caches['model_cache']
 
 
 class ApplicationStatistics(APIView):
@@ -199,7 +196,8 @@ class Application(APIView):
                 return result.success(ApplicationSerializer.Operate(
                     data={'application_id': request.auth.keywords.get('application_id'),
                           'user_id': request.user.id}).profile())
-            raise AppAuthenticationFailed(401, "身份异常")
+            else:
+                raise AppAuthenticationFailed(401, "身份异常")
 
     class ApplicationKey(APIView):
         authentication_classes = [TokenAuth]
@@ -334,7 +332,8 @@ class Application(APIView):
                          tags=['应用'])
     @has_permissions(PermissionConstants.APPLICATION_CREATE, compare=CompareConstants.AND)
     def post(self, request: Request):
-        return result.success(ApplicationSerializer.Create(data={'user_id': request.user.id}).insert(request.data))
+        ApplicationSerializer.Create(data={'user_id': request.user.id}).insert(request.data)
+        return result.success(True)
 
     @action(methods=['GET'], detail=False)
     @swagger_auto_schema(operation_summary="获取应用列表",
@@ -370,26 +369,6 @@ class Application(APIView):
                                                     'similarity': request.query_params.get('similarity'),
                                                     'search_mode': request.query_params.get('search_mode')}).hit_test(
                 ))
-
-    class Publish(APIView):
-        authentication_classes = [TokenAuth]
-
-        @action(methods=['PUT'], detail=False)
-        @swagger_auto_schema(operation_summary="发布应用",
-                             operation_id="发布应用",
-                             manual_parameters=ApplicationApi.Operate.get_request_params_api(),
-                             request_body=ApplicationApi.Publish.get_request_body_api(),
-                             responses=result.get_default_response(),
-                             tags=['应用'])
-        @has_permissions(ViewPermission(
-            [RoleConstants.ADMIN, RoleConstants.USER],
-            [lambda r, keywords: Permission(group=Group.APPLICATION, operate=Operate.MANAGE,
-                                            dynamic_tag=keywords.get('application_id'))],
-            compare=CompareConstants.AND))
-        def put(self, request: Request, application_id: str):
-            return result.success(
-                ApplicationSerializer.Operate(
-                    data={'application_id': application_id, 'user_id': request.user.id}).publish(request.data))
 
     class Operate(APIView):
         authentication_classes = [TokenAuth]

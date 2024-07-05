@@ -15,7 +15,6 @@ class Page(dict):
 
 
 class Result(JsonResponse):
-    charset = 'utf-8'
     """
      接口统一返回对象
     """

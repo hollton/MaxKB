@@ -57,15 +57,16 @@ def page_not_found(request, exception):
     """
     if request.path.startswith("/api/"):
         return Result(response_status=status.HTTP_404_NOT_FOUND, code=404, message="找不到接口")
-    index_path = os.path.join(PROJECT_DIR, 'apps', "static", 'ui', 'index.html')
-    if not os.path.exists(index_path):
-        return HttpResponse("页面不存在", status=404)
-    file = open(index_path, "r", encoding='utf-8')
-    content = file.read()
-    file.close()
-    if request.path.startswith('/ui/chat/'):
-        return HttpResponse(content, status=200)
-    return HttpResponse(content, status=200, headers={'X-Frame-Options': 'DENY'})
+    else:
+        index_path = os.path.join(PROJECT_DIR, 'apps', "static", 'ui', 'index.html')
+        if not os.path.exists(index_path):
+            return HttpResponse("页面不存在", status=404)
+        file = open(index_path, "r", encoding='utf-8')
+        content = file.read()
+        file.close()
+        if request.path.startswith('/ui/chat/'):
+            return HttpResponse(content, status=200)
+        return HttpResponse(content, status=200, headers={'X-Frame-Options': 'DENY'})
 
 
 handler404 = page_not_found

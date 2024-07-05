@@ -2,7 +2,6 @@
   <el-avatar
     :size="30"
     :style="{ background: props.pinyinColor && getAvatarColour(firstUserName) }"
-    style="flex-shrink: 0"
     v-bind="$attrs"
   >
     <slot> {{ firstUserName }} </slot>
@@ -17,7 +16,6 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  //是否用拼音字母颜色
   pinyinColor: {
     type: Boolean,
     default: false
