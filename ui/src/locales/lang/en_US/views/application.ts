@@ -40,7 +40,7 @@ export default {
       appDescription: {
         label: 'Application Description',
         placeholder:
-          'Describe the application scenario and use, e.g.: Netdragon assistant answering user questions about Netdragon product usage'
+          'Describe the application scenario and use, e.g.: MaxKB assistant answering user questions about MaxKB product usage'
       },
       aiModel: {
         label: 'AI Model',
@@ -101,13 +101,13 @@ export default {
       concent: 'Content',
       concentPlaceholder: 'Please enter content',
       designated_answer:
-        'Hello, I am Netdragon Assistant. My knowledge base only contains information related to Netdragon products. Please rephrase your question.'
+        'Hello, I am MaxKB Assistant. My knowledge base only contains information related to MaxKB products. Please rephrase your question.'
     }
   },
   prompt: {
     defaultPrompt:
       'Known information:\n{data}\nResponse requirements:\n- Please use concise and professional language to answer the user\'s question.\n- If you do not know the answer, reply, "No relevant information was found in the knowledge base; it is recommended to consult technical support or refer to the official documentation for operations."\n- Avoid mentioning that your knowledge is obtained from known information.\n- Ensure the answer is consistent with the information described in the known data.\n- Please use Markdown syntax to optimize the format of the answer.\n- Directly return any images, link addresses, and script languages found in the known information.\n- Please respond in the same language as the question.\nQuestion:\n{question}',
     defaultPrologue:
-      'Hello, I am Netdragon Assistant. You can ask me questions about using Netdragon.\n- What are the main features of Netdragon?\n- Which large language models does Netdragon support?\n- What document types does Netdragon support?'
+      'Hello, I am MaxKB Assistant. You can ask me questions about using MaxKB.\n- What are the main features of MaxKB?\n- Which large language models does MaxKB support?\n- What document types does MaxKB support?'
   }
 }
