@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
     envDir: envDir,
     plugins: [vue(), DefineOptions()],
     server: {
-      cors: true,
+      cors: false,
       host: '0.0.0.0',
       port: Number(ENV.VITE_APP_PORT),
       strictPort: true,
