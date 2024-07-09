@@ -61,7 +61,7 @@ const form = {
   name: '',
   desc: '',
   prologue:
-    '您好，我是 MaxKB 小助手，您可以向我提出 MaxKB 使用问题。\n- MaxKB 主要功能有什么？\n- MaxKB 支持哪些大语言模型？\n- MaxKB 支持哪些文档类型？'
+    '您好，我是小助手，您可以向我提出使用问题。\n-主要功能有什么？\n-支持哪些大语言模型？\n-支持哪些文档类型？'
 }
 const form_data = computed({
   get: () => {
