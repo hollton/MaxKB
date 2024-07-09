@@ -6,6 +6,7 @@
     :close-on-press-escape="false"
     :destroy-on-close="true"
     :before-close="close"
+    append-to-body
   >
     <template #header="{ close, titleId, titleClass }">
       <el-breadcrumb separator=">">
@@ -41,7 +42,7 @@
               </div>
               <el-tooltip effect="dark" placement="right">
                 <template #content>
-                  <p>自定义的模型名称</p>
+                  <p>中自定义的模型名称</p>
                 </template>
                 <AppIcon iconName="app-warning" class="app-warning-icon"></AppIcon>
               </el-tooltip>
